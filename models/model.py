@@ -57,7 +57,8 @@ if __name__ == "__main__":
     model.summary()
 
     # Setup TensorBoard callback
-    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    run_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    log_dir = "logs/fit/" + run_time
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
     
     start_time = time.time()  # Record start time
@@ -70,7 +71,7 @@ if __name__ == "__main__":
     training_time = end_time - start_time  # Calculate training time
 
     # Create a folder for this run using the current timestamp or a run number
-    run_folder = os.path.join(models_path, f"runs/{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}")
+    run_folder = os.path.join(models_path, f"runs/{run_time}")
     os.makedirs(run_folder, exist_ok=True)
 
     # Save the model to the run folder
