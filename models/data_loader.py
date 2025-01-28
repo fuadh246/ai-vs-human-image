@@ -47,6 +47,61 @@ class DataLoader():
         return image
 
     def __len__(self):
-        pass
+        if self.train_df is None:
+            raise ValueError("Train data is not loaded")
+        return len(self.train_df)
+    
     def __getitem__(self,index):
-        pass
+        if self.train_df is None:
+            raise ValueError("Train data is not loaded, call load_data() first")
+        
+        if index < 0 or index >= len(self.train_df):
+            raise ValueError(f"Index {index} out of range")
+        
+        image_path = self.train_df.iloc[index]['image_path']
+        label = self.train_df.iloc[index]['label']
+        image = self._process_image(image_path)
+        return image_path ,image, label
+    
+    def show_image(self, index):
+        if self.train_df is None:
+            raise ValueError("Train data is not loaded, call load_data() first")
+        image_path,_,label = self.__getitem__(index)
+        print(f"Location: {image_path} Label: {label}")
+        image = load_img(image_path)
+        plt.imshow(image)
+        plt.title(label)
+        plt.show()
+
+    
+    def get_train_data(self):
+        if self.train_df is None:
+            raise ValueError("Train data is not loaded, call load_data() first")
+        return self._create_dataset(self.train_df)
+    
+    def get_val_data(self):
+        if self.val_df is None:
+            raise ValueError("Val data is not loaded, call load_data() first")
+        return self._create_dataset(self.val_df)
+    
+    def get_test_data(self):
+        if self.test_df is None:
+            raise ValueError("Test data is not loaded, call load_data() first")
+        return self._create_dataset(self.test_df, labeled=False)
+
+    
+
+    def _create_dataset(self, df, labeled=True):
+        if labeled:
+            dataset = tf.data.Dataset.from_tensor_slices((df['image_path'].values, df['label'].values))
+            dataset = dataset.map(self._process_data, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+        else:
+            dataset = tf.data.Dataset.from_tensor_slices(df['image_path'].values)
+            dataset = dataset.map(self._process_image, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        return dataset.batch(self.batch_size).prefetch(tf.data.AUTOTUNE)
+    
+    def _process_data(self, image_path, label):
+        image = self._process_image(image_path)
+        label = tf.one_hot(label, depth=2)
+        return image, label
