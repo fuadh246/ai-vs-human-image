@@ -176,3 +176,5 @@ cython_debug/
 venv-img/
 train_data/
 test_data_v2/
+logs/
+models/runs/

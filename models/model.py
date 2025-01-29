@@ -97,6 +97,11 @@ if __name__ == "__main__":
     predictions_file = os.path.join(run_folder, 'predictions.csv')
     results_df.to_csv(predictions_file, index=False)
     print(f"Predictions saved to: {predictions_file}")
+    
+    # Ensure the submission file follows the competition's specified format
+    submission_df = results_df[['id', 'label']]  # Include only the required columns
+    submission_file = os.path.join(run_folder, 'submission.csv')
+    submission_df.to_csv(submission_file, index=False)
 
     # Instructions to run TensorBoard
     print(f"\nTotal training time: {training_time:.2f} seconds")
