@@ -34,6 +34,18 @@ The dataset comprises two categories:
 1. **AI-Generated Images:** Images produced by AI models such as StyleGAN and DALL-E
 2. **Human-Created Images:** Photographs created by humans.
 
+## Deployment
+The trained model is deployed as a web application to allow users to upload an image and receive a prediction indicating whether the image is AI-generated or human-created.
+
+### Hugging Face Space
+A demo of the model is available on Hugging Face Spaces:
+- **URL:** https://huggingface.co/spaces/fuadh246/ai-vs-human-image-api
+
+### Vercel Deployment
+The application is also deployed on Vercel:
+
+- **URL:** https://vercel.com/fuads-projects-0b82f48c/ai-vs-human-identifier
+
 
 ## Acknowledgments
 Inspiration from similar projects such as [Detect AI vs. Human-Generated Images](https://www.kaggle.com/competitions/detect-ai-vs-human-generated-images/overview)
