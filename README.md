@@ -1,6 +1,6 @@
 # AI vs Human Image Classification
 
-This repository contains a project focused on distinguishing between AI-generated images and human-created images using machine learning techniques.
+This repository contains a project that distinguishes between AI-generated and human-created images using machine-learning techniques.
 
 ## Project Overview
 With the advancement of AI technologies, particularly in image generation, it has become increasingly challenging to differentiate between images produced by AI and those created by humans. This project aims to develop a classifier capable of making this distinction accurately.
@@ -44,8 +44,7 @@ A demo of the model is available on Hugging Face Spaces:
 ### Vercel Deployment
 The application is also deployed on Vercel:
 
-- **URL:** https://vercel.com/fuads-projects-0b82f48c/ai-vs-human-identifier
-
+- **URL:** https://ai-vs-human-identifier.vercel.app
 
 ## Acknowledgments
 Inspiration from similar projects such as [Detect AI vs. Human-Generated Images](https://www.kaggle.com/competitions/detect-ai-vs-human-generated-images/overview)
